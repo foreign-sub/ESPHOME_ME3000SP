@@ -198,6 +198,7 @@ sensor:
       - multiply: 10
   - platform: modbus_controller
     name: "Battery Voltage"
+    id: "battery_voltage"
     address: 0x020e
     register_type: "holding"
     value_type: U_WORD
@@ -221,6 +222,7 @@ sensor:
     icon: "mdi:current-dc"
   - platform: modbus_controller
     name: "State of Charge"
+    id: "state_of_charge"
     address: 0x0210
     register_type: "holding"
     value_type: U_WORD
@@ -229,6 +231,7 @@ sensor:
     unit_of_measurement: "%"
   - platform: modbus_controller
     name: "Battery Temperature"
+    id: "battery_temperature"
     address: 0x0211
     register_type: "holding"
     value_type: U_WORD
@@ -259,6 +262,7 @@ sensor:
       - multiply: 10
   - platform: modbus_controller
     name: "Input/Output Power"
+    id: "input_output_power"
     address: 0x0214
     register_type: "holding"
     value_type: S_WORD
