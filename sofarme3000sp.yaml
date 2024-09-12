@@ -28,6 +28,37 @@ wifi:
     ssid: "SOFAR ME3000 Fallback Hotspot"
     password: "XXXXXXXXXXXX"
 
+i2c:
+  sda: GPIO14
+  scl: GPIO12
+
+font:
+  - file: "gfonts://Roboto"
+    id: font_top
+    size: 16
+  - file: "gfonts://Roboto"
+    id: font_left
+    size: 48
+  - file: "gfonts://Roboto"
+    id: font_right
+    size: 20
+
+image:
+  - file: mdi:alert-outline
+    id: alert
+    resize: 80x80
+
+display:
+  - platform: ssd1306_i2c
+    model: "SSD1306 128x64"
+    address: 0x3C
+    lambda: |-
+      it.printf(64, 0, id(font_top), TextAlign::TOP_CENTER, "State: %s", id(sofarme3000sp_running_state).state.c_str());
+      it.printf(0, 60, id(font_left), TextAlign::BASELINE_LEFT, "%.1fW", id(input_output_power).state);
+      it.printf(127, 23, id(font_right), TextAlign::TOP_RIGHT , "%.1f%%", id(state_of_charge).state);
+      it.printf(127, 36, id(font_right), TextAlign::BASELINE_RIGHT , "%.1fC", id(battery_temperature).state);
+      it.printf(127, 60, id(font_right), TextAlign::BASELINE_RIGHT , "%.1fV", id(battery_voltage).state);
+
 captive_portal:
 uart:
   id: moduart
@@ -55,7 +86,7 @@ sensor:
     name: "Running State"
     address: 0x0200
     register_type: "holding"
-    value_type: U_WORD      
+    value_type: U_WORD
     id: "sofarme3000sp_running_state"
     on_value:
       then:
@@ -64,25 +95,25 @@ sensor:
            state: !lambda |-
             if (x==0) {
               return {"Wait"};
-            } 
+            }
             if (x==1) {
               return {"Check"};
-            } 
+            }
             if (x==2) {
               return {"Normal"};
-            } 
+            }
             if (x==3) {
               return {"Check Discharge"};
-            } 
+            }
             if (x==4) {
               return {"Discharge"};
-            } 
+            }
             if (x==5) {
               return {"EPS"};
-            } 
+            }
             if (x==6) {
               return {"Fault (temporary)"};
-            } 
+            }
             if (x==7) {
               return {"Fault (permanent)"};
             }
@@ -91,31 +122,31 @@ sensor:
     name: "Fault Message 1"
     address: 0x0201
     register_type: "holding"
-    value_type: U_WORD      
+    value_type: U_WORD
     icon: "mdi:alert-circle"
   - platform: modbus_controller
     name: "Fault Message 2"
     address: 0x0202
     register_type: "holding"
-    value_type: U_WORD      
+    value_type: U_WORD
     icon: "mdi:alert-circle"
   - platform: modbus_controller
     name: "Fault Message 3"
     address: 0x0203
     register_type: "holding"
-    value_type: U_WORD      
+    value_type: U_WORD
     icon: "mdi:alert-circle"
   - platform: modbus_controller
     name: "Fault Message 4"
     address: 0x0204
     register_type: "holding"
-    value_type: U_WORD      
+    value_type: U_WORD
     icon: "mdi:alert-circle"
   - platform: modbus_controller
     name: "Fault Message 5"
     address: 0x0205
     register_type: "holding"
-    value_type: U_WORD      
+    value_type: U_WORD
     icon: "mdi:alert-circle"
   - platform: modbus_controller
     name: "Grid Voltage"
@@ -125,7 +156,7 @@ sensor:
     filters:
       - multiply: 0.1
     device_class: voltage
-    state_class: measurement      
+    state_class: measurement
     unit_of_measurement: "V"
     accuracy_decimals: 2
   - platform: modbus_controller
@@ -136,7 +167,7 @@ sensor:
     filters:
       - multiply: 0.01
     device_class: current
-    state_class: measurement      
+    state_class: measurement
     unit_of_measurement: "A"
     accuracy_decimals: 2
   - platform: modbus_controller
@@ -147,7 +178,7 @@ sensor:
     filters:
       - multiply: 0.01
     device_class: frequency
-    state_class: measurement      
+    state_class: measurement
     unit_of_measurement: "Hz"
     accuracy_decimals: 2
   - platform: modbus_controller
@@ -156,7 +187,7 @@ sensor:
     register_type: "holding"
     value_type: S_WORD
     device_class: power
-    state_class: measurement      
+    state_class: measurement
     unit_of_measurement: "W"
     accuracy_decimals: 0
     filters:
@@ -169,7 +200,7 @@ sensor:
     filters:
       - multiply: 0.01
     device_class: voltage
-    state_class: measurement      
+    state_class: measurement
     unit_of_measurement: "V"
     accuracy_decimals: 2
   - platform: modbus_controller
@@ -252,7 +283,7 @@ sensor:
     filters:
       - multiply: 0.1
     device_class: voltage
-    state_class: measurement      
+    state_class: measurement
     unit_of_measurement: "V"
     accuracy_decimals: 2
   - platform: modbus_controller
@@ -395,19 +426,19 @@ sensor:
             int value=(int)x;
             if ((value & 1)) {
               message.append("ID81 ");
-            } 
+            }
             if ((value & 2)) {
               message.append("ID82 ");
-            } 
+            }
             if ((value & 4)) {
               message.append("ID83 ");
-            } 
+            }
             if ((value & 8)) {
               message.append("ID84 ");
-            } 
+            }
             if ((value & 128)) {
               message.append("ID85 ");
-            } 
+            }
             return message;
 
   - platform: modbus_controller
