@@ -56,7 +56,7 @@ display:
     model: "SSD1306 128x64"
     address: 0x3C
     lambda: |-
-      it.printf(64, 0, id(font_top), TextAlign::TOP_CENTER, "State: %s", id(sofarme3000sp_running_state).state.c_str());
+      it.printf(64, 0, id(font_top), TextAlign::TOP_CENTER, "State: %s", id(template_text_state_description).state.c_str());
       it.printf(0, 60, id(font_left), TextAlign::BASELINE_LEFT, "%.1fW", id(input_output_power).state);
       it.printf(127, 23, id(font_right), TextAlign::TOP_RIGHT , "%.1f%%", id(state_of_charge).state);
       it.printf(127, 36, id(font_right), TextAlign::BASELINE_RIGHT , "%.1fC", id(battery_temperature).state);
