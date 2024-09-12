@@ -81,7 +81,7 @@ modbus_controller:
   - id: sdm
     address: 1
     modbus_id: modbus1
-    command_throttle: 100ms
+    command_throttle: 400ms
     setup_priority: -10
     update_interval: 5s
 sensor:
