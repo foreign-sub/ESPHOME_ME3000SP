@@ -28,10 +28,6 @@ wifi:
     ssid: "SOFAR ME3000 Fallback Hotspot"
     password: "XXXXXXXXXXXX"
 
-i2c:
-  sda: GPIO14
-  scl: GPIO12
-
 font:
   - file: "gfonts://Roboto"
     id: font_top
@@ -48,14 +44,17 @@ image:
     id: alert
     resize: 80x80
 
+i2c:
+  sda: GPIO14
+  scl: GPIO12
+  scan: True
+  id: bus_a
+  frequency: 400kHz
 
 display:
   - platform: ssd1306_i2c
     model: "SSD1306 128x64"
     address: 0x3C
-    scan: True
-    id: bus_a
-    frequency: 400kHz
     lambda: |-
       it.printf(64, 0, id(font_top), TextAlign::TOP_CENTER, "State: %s", id(sofarme3000sp_running_state).state.c_str());
       it.printf(0, 60, id(font_left), TextAlign::BASELINE_LEFT, "%.1fW", id(input_output_power).state);
