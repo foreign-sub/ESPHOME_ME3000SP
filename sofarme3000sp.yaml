@@ -14,10 +14,11 @@ logger:
 # Enable Home Assistant API
 api:
   encryption:
-    key: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+    key: !secret api_key
 
 ota:
-  password: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+  - platform: esphome
+    password: !secret ota_password
 
 wifi:
   ssid: !secret wifi_ssid
@@ -26,7 +27,7 @@ wifi:
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "SOFAR ME3000 Fallback Hotspot"
-    password: "XXXXXXXXXXXX"
+    password: !secret wifi_fallback
 
 font:
   - file: "gfonts://Roboto"
@@ -469,8 +470,6 @@ sensor:
     unit_of_measurement: "°C"
     device_class: temperature
     state_class: measurement
-
-
 
 text_sensor:
   - platform: template
