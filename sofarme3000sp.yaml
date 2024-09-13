@@ -29,6 +29,8 @@ wifi:
     ssid: "SOFAR ME3000 Fallback Hotspot"
     password: !secret wifi_fallback
 
+captive_portal:
+
 web_server:
   port: 80
 
@@ -66,7 +68,6 @@ display:
       it.printf(127, 36, id(font_right), TextAlign::BASELINE_RIGHT , "%.1fC", id(battery_temperature).state);
       it.printf(127, 60, id(font_right), TextAlign::BASELINE_RIGHT , "%.1fV", id(battery_voltage).state);
 
-captive_portal:
 uart:
   id: moduart
   tx_pin: GPIO1
