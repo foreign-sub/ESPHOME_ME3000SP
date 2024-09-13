@@ -29,6 +29,9 @@ wifi:
     ssid: "SOFAR ME3000 Fallback Hotspot"
     password: !secret wifi_fallback
 
+web_server:
+  port: 80
+
 font:
   - file: "gfonts://Roboto"
     id: font_top
@@ -261,7 +264,7 @@ sensor:
     device_class: temperature
     state_class: measurement
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: sdm_fast
     name: "Feed Power"
     address: 0x0212
     register_type: "holding"
@@ -273,7 +276,7 @@ sensor:
     filters:
       - multiply: 10
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: sdm_fast
     name: "Load Power"
     address: 0x0213
     register_type: "holding"
@@ -285,7 +288,7 @@ sensor:
     filters:
       - multiply: 10
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: sdm_fast
     name: "Input/Output Power"
     id: "input_output_power"
     address: 0x0214
@@ -298,7 +301,7 @@ sensor:
     filters:
       - multiply: 10
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: sdm_fast
     name: "Generation Power"
     address: 0x0215
     register_type: "holding"
