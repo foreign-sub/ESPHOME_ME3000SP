@@ -83,22 +83,28 @@ modbus:
   flow_control_pin: GPIO5
 
 modbus_controller:
-  - id: sdm_slow
-    address: 0x01
-    modbus_id: modbus1
-    command_throttle: 400ms
-    setup_priority: -10
-    update_interval: 30s
-  - id: sdm_fast
+  - id: mbc_5s
     address: 0x01
     modbus_id: modbus1
     command_throttle: 100ms
     setup_priority: -10
     update_interval: 5s
+  - id: mbc_30s
+    address: 0x01
+    modbus_id: modbus1
+    command_throttle: 400ms
+    setup_priority: -10
+    update_interval: 30s
+  - id: mbc_300s
+    address: 0x01
+    modbus_id: modbus1
+    command_throttle: 400ms
+    setup_priority: -10
+    update_interval: 300s
 
 sensor:
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: mbc_30s
     name: "Running State"
     address: 0x0200
     register_type: "holding"
@@ -135,42 +141,42 @@ sensor:
             }
             return {"Unknown"};
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: mbc_30s
     name: "Fault Message 1"
     address: 0x0201
     register_type: "holding"
     value_type: U_WORD
     icon: "mdi:alert-circle"
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: mbc_30s
     name: "Fault Message 2"
     address: 0x0202
     register_type: "holding"
     value_type: U_WORD
     icon: "mdi:alert-circle"
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: mbc_30s
     name: "Fault Message 3"
     address: 0x0203
     register_type: "holding"
     value_type: U_WORD
     icon: "mdi:alert-circle"
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: mbc_30s
     name: "Fault Message 4"
     address: 0x0204
     register_type: "holding"
     value_type: U_WORD
     icon: "mdi:alert-circle"
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: mbc_30s
     name: "Fault Message 5"
     address: 0x0205
     register_type: "holding"
     value_type: U_WORD
     icon: "mdi:alert-circle"
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: mbc_30s
     name: "Grid Voltage"
     address: 0x0206
     register_type: "holding"
@@ -182,7 +188,7 @@ sensor:
     unit_of_measurement: "V"
     accuracy_decimals: 2
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: mbc_30s
     name: "Grid Current"
     address: 0x0207
     register_type: "holding"
@@ -194,7 +200,7 @@ sensor:
     unit_of_measurement: "A"
     accuracy_decimals: 2
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: mbc_30s
     name: "Grid Frequency"
     address: 0x020c
     register_type: "holding"
@@ -206,7 +212,7 @@ sensor:
     unit_of_measurement: "Hz"
     accuracy_decimals: 2
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: mbc_30s
     name: "Battery Power"
     address: 0x020d
     register_type: "holding"
@@ -218,7 +224,7 @@ sensor:
     filters:
       - multiply: 10
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: mbc_30s
     name: "Battery Voltage"
     id: "battery_voltage"
     address: 0x020e
@@ -231,7 +237,7 @@ sensor:
     unit_of_measurement: "V"
     accuracy_decimals: 2
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: mbc_30s
     name: "Battery Current"
     address: 0x020f
     register_type: "holding"
@@ -244,7 +250,7 @@ sensor:
     accuracy_decimals: 2
     icon: "mdi:current-dc"
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: mbc_30s
     name: "State of Charge"
     id: "state_of_charge"
     address: 0x0210
@@ -254,7 +260,7 @@ sensor:
     state_class: measurement
     unit_of_measurement: "%"
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: mbc_30s
     name: "Battery Temperature"
     id: "battery_temperature"
     address: 0x0211
@@ -264,7 +270,7 @@ sensor:
     device_class: temperature
     state_class: measurement
   - platform: modbus_controller
-    modbus_controller_id: sdm_fast
+    modbus_controller_id: mbc_5s
     name: "Feed Power"
     address: 0x0212
     register_type: "holding"
@@ -276,7 +282,7 @@ sensor:
     filters:
       - multiply: 10
   - platform: modbus_controller
-    modbus_controller_id: sdm_fast
+    modbus_controller_id: mbc_5s
     name: "Load Power"
     address: 0x0213
     register_type: "holding"
@@ -288,7 +294,7 @@ sensor:
     filters:
       - multiply: 10
   - platform: modbus_controller
-    modbus_controller_id: sdm_fast
+    modbus_controller_id: mbc_5s
     name: "Input/Output Power"
     id: "input_output_power"
     address: 0x0214
@@ -301,7 +307,7 @@ sensor:
     filters:
       - multiply: 10
   - platform: modbus_controller
-    modbus_controller_id: sdm_fast
+    modbus_controller_id: mbc_5s
     name: "Generation Power"
     address: 0x0215
     register_type: "holding"
@@ -313,7 +319,7 @@ sensor:
     filters:
       - multiply: 10
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: mbc_30s
     name: "EPS Voltage"
     address: 0x0216
     register_type: "holding"
@@ -325,7 +331,7 @@ sensor:
     unit_of_measurement: "V"
     accuracy_decimals: 2
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: mbc_30s
     name: "EPS Power"
     address: 0x0217
     register_type: "holding"
@@ -337,7 +343,7 @@ sensor:
     filters:
       - multiply: 10
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: mbc_300s
     name: "Energy Export (Day)"
     address: 0x0219
     register_type: "holding"
@@ -350,7 +356,7 @@ sensor:
       - multiply: 10
     icon: "mdi:transmission-tower-export"
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: mbc_300s
     name: "Energy Import (Day)"
     address: 0x021a
     register_type: "holding"
@@ -364,7 +370,7 @@ sensor:
     icon: "mdi:transmission-tower-import"
 
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: mbc_300s
     name: "Energy Consumption (Day)"
     address: 0x021b
     register_type: "holding"
@@ -377,7 +383,7 @@ sensor:
       - multiply: 10
 
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: mbc_30s
     name: "Total generation"
     address: 0x021c
     register_type: "holding"
@@ -388,7 +394,7 @@ sensor:
     accuracy_decimals: 0
 
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: mbc_30s
     name: "Total export"
     address: 0x021e
     register_type: "holding"
@@ -400,7 +406,7 @@ sensor:
     icon: "mdi:transmission-tower-export"
 
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: mbc_30s
     name: "Total import"
     address: 0x0220
     register_type: "holding"
@@ -412,7 +418,7 @@ sensor:
     icon: "mdi:transmission-tower-import"
 
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: mbc_30s
     name: "Total load consumption"
     address: 0x0222
     register_type: "holding"
@@ -423,7 +429,7 @@ sensor:
     accuracy_decimals: 0
 
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: mbc_300s
     name: "Energy Battery Charge (Day)"
     address: 0x0224
     register_type: "holding"
@@ -437,7 +443,7 @@ sensor:
     icon: "mdi:battery-plus-outline"
 
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: mbc_300s
     name: "Energy Battery Discharged (Day)"
     address: 0x0225
     register_type: "holding"
@@ -451,7 +457,7 @@ sensor:
     icon: "mdi:battery-minus-outline"
 
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: mbc_30s
     name: "Count Down Timer"
     address: 0x022a
     register_type: "holding"
@@ -460,7 +466,7 @@ sensor:
     icon: "mdi:numeric"
 
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: mbc_30s
     name: "Inverter Alert Message"
     address: 0x022b
     register_type: "holding"
@@ -492,7 +498,7 @@ sensor:
             return message;
 
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: mbc_300s
     name: "Battery Cycles"
     address: 0x022c
     register_type: "holding"
@@ -501,7 +507,7 @@ sensor:
     icon: "mdi:numeric"
 
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: mbc_30s
     name: "Inverter Temperature"
     address: 0x0238
     register_type: "holding"
@@ -511,7 +517,7 @@ sensor:
     state_class: measurement
 
   - platform: modbus_controller
-    modbus_controller_id: sdm_slow
+    modbus_controller_id: mbc_30s
     name: "Inverter Heat Sink Temperature"
     address: 0x0239
     register_type: "holding"
