@@ -7,9 +7,9 @@ esp8266:
 
 # Enable logging
 logger:
-    level: WARN
-    baud_rate: 0
-    hardware_uart: UART1
+  level: WARN
+  baud_rate: 0
+  hardware_uart: UART1
 
 # Enable Home Assistant API
 api:
@@ -84,19 +84,19 @@ modbus:
 
 modbus_controller:
   - id: mbc_5s
-    address: 0x01
+    address: 0x1
     modbus_id: modbus1
     command_throttle: 100ms
     setup_priority: -10
     update_interval: 5s
   - id: mbc_30s
-    address: 0x01
+    address: 0x1
     modbus_id: modbus1
     command_throttle: 400ms
     setup_priority: -10
     update_interval: 30s
   - id: mbc_300s
-    address: 0x01
+    address: 0x1
     modbus_id: modbus1
     command_throttle: 400ms
     setup_priority: -10
