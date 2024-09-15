@@ -118,8 +118,8 @@ sensor:
            state: !lambda |-
             static const std::map<int, const char*> state_lookup = {
               {0, "Wait"},
-              {1, "Check"},
-              {2, "Normal"},
+              {1, "Check Charge"},
+              {2, "Charge"},
               {3, "Check Discharge"},
               {4, "Discharge"},
               {5, "EPS"},
