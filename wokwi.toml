@@ -1,7 +1,7 @@
 [wokwi]
 version = 1
-elf = ".esphome/build/sofarme3000sp/.pioenvs/sofarme3000sp/firmware.elf"
-firmware = ".esphome/build/sofarme3000sp/.pioenvs/sofarme3000sp/firmware.bin"
+elf = ".esphome/build/sofarme3000sp/.pio/build/sofarme3000sp/firmware.elf"
+firmware = ".esphome/build/sofarme3000sp/.pio/build/sofarme3000sp/firmware.bin"
 gdbServerPort=3333
 
 # Forward http://localhost:8180 to port 80 on the simulated ESP32:
