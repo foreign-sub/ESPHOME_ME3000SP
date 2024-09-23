@@ -24,6 +24,7 @@ The configuration has the correct units, icons and device classes to make integr
 * Battery Power
 * Battery Voltage
 * Battery Current
+* Battery Health
 * State of Charge
 * Battery Temperature
 * Feed Power
